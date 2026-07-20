@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Айк & Ангелина - Свадьба</title>
+    <!-- Подключаем шрифты Google Fonts для имитации типографики -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+        <!-- Подключение библиотеки анимаций AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <style>
+        /* Сброс стилей */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        /* --- БЕЗОПАСНОЕ УБИРАНИЕ ГОРИЗОНТАЛЬНОГО СКРОЛЛА (НЕ ЛОМАЕТ AOS) --- */
+body {
+    overflow-x: hidden;
+}
+
+        
+
+        /* Контейнер Hero-секции */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Занимает весь экран на мобильном */
+            overflow: hidden;
+            display: grid;
+            place-items: center; /* Центрируем контент */
+        }
+
+        /* Фоновое изображение */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* ИСПОЛЬЗУЕМ ВАШЕ ФОТО 1.jpg */
+            background-image: url('1.jpg'); 
+            background-size: cover;
+            background-position: center 20%; /* Смещаем фокус чуть выше, чтобы лица были видны */
+            filter: grayscale(100%); /* Делаем фото Ч/Б */
+            z-index: 1;
+        }
+
+        /* Темный градиент для читаемости текста (как на референсе) */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Градиент от прозрачного к темному внизу */
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(0,0,0,0.8) 100%);
+            z-index: 2;
+        }
+
+        /* Контентная часть (Текст) */
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            color: #ffffff;
+            /* Отступ снизу, чтобы текст стоял внизу как на фото, а не по центру */
+            align-self: flex-end; 
+            padding-bottom: 8vh; 
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Стили текста: WEDDING DAY */
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            font-weight: 400;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 5px;
+        }
+
+        /* Стили текста: ВАДИМ & АННА */
+        .main-title {
+            font-family: 'Anton', sans-serif; /* Максимально похожий на фото рубленый шрифт */
+            font-size: 3.2rem; /* Делаем большим */
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            line-height: 1;
+            margin: 0;
+            font-weight: 400;
+        }
+
+        /* Разделительная линия */
+        .divider-line {
+            width: 1px;
+            height: 40px;
+            background-color: #ffffff;
+            margin: 15px 0 10px 0;
+            opacity: 0.8;
+        }
+
+        /* Стили текста: ЛИСТАЙТЕ НИЖЕ */
+        .scroll-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+            color: #ffffff;
+            opacity: 0.9;
+        }
+
+
+        /* --- СЕКЦИЯ С ДАТОЙ И ЛОКАЦИЯМИ (ПОЛНОСТЬЮ ИСПРАВЛЕНА) --- */
+.info-section {
+    background-color: #ffffff;
+    padding: 50px 20px 40px 20px; /* Отступы от краев экрана */
+    display: flex;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.info-container {
+    max-width: 480px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- ВЕРХНЯЯ ЧАСТЬ С ДАТОЙ --- */
+/* --- ВЕРХНЯЯ ЧАСТЬ С ДАТОЙ --- */
+.info-header {
+    text-align: right; /* ВЫРАВНИВАНИЕ ПО ПРАВОМУ КРАЮ (как на референсе слева) */
+    margin-bottom: 40px;
+    width: 100%; /* Важно, чтобы блок занимал всю ширину, тогда текст прижмется к правому краю */
+    padding-right: 5px; /* Небольшой отступ от края, чтобы текст не прилипал к границе экрана */
+}
+
+.info-text-top {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #333333; /* Темно-серый, не черный */
+    margin-bottom: 20px; /* Отступ до даты */
+}
+
+.info-date {
+    font-family: 'Playfair Display', serif;
+    color: #2c2c2c; /* Благородный графитовый цвет, а не ярко-черный */
+    font-size: 2.4rem;
+    letter-spacing: 1px;
+    margin: 0 0 20px 0; /* Отступ после даты */
+    font-weight: 400;
+}
+
+.info-text-bottom {
+    font-size: 0.9rem;
+    color: #333333;
+}
+
+/* --- ЧЕРНАЯ КАПСУЛА --- */
+/* --- ЧЕРНАЯ КАПСУЛА (ЭЛАСТИЧНАЯ ФОРМА) --- */
+/* --- ЧЕРНАЯ КАПСУЛА (ИДЕАЛЬНАЯ ФОРМА С РЕФЕРЕНСА) --- */
+.location-capsule {
+    background-color: #1f2022;
+    width: 100%;
+    
+    /* Специальные радиусы для формы капсулы (как на левом фото) */
+    border-radius: 200px 200px 200px 200px; 
+    
+    padding: 95px 30px 95px 30px;
+    text-align: center;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    margin-top: 25px; /* Отступ от даты сверху */
+}
+
+.loc-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+}
+
+/* --- БЛОКИ ЛОКАЦИЙ --- */
+.loc-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 35px; /* Отступ между двумя локациями */
+}
+.loc-block:last-child {
+    margin-bottom: 0;
+}
+
+.loc-name {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.loc-address {
+    font-size: 0.85rem;
+    color: #b0b0b0; /* Светло-серый цвет для адреса, как на макете */
+    line-height: 1.4;
+    margin-bottom: 18px;
+    max-width: 85%;
+}
+
+/* --- КНОПКИ --- */
+.loc-btn {
+    display: inline-block;
+    background-color: #ffffff;
+    color: #1f2022;
+    text-decoration: none;
+    padding: 14px 30px;
+    border-radius: 50px; /* Идеальный овал */
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: opacity 0.2s;
+    /* Убираем растягивание */
+    width: auto; 
+    min-width: 200px;
+}
+.loc-btn:hover {
+    opacity: 0.8;
+}
+
+
+/* --- СЕКЦИЯ ПРОГРАММЫ (БЕЗ ТИРЕ) --- */
+.program-section {
+    background-color: #ffffff;
+    padding: 40px 20px 80px 20px;
+    display: flex;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.program-container {
+    max-width: 480px;
+    width: 100%;
+}
+
+/* Заголовок WEDDING PROGRAM */
+.program-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    line-height: 1.1;
+    letter-spacing: 1px;
+    color: #1a1a1a;
+    margin-bottom: 50px;
+    font-weight: 400;
+}
+
+/* Таймлайн контейнер */
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 35px; /* Расстояние между пунктами */
+}
+
+.timeline-item {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0; /* Убираем любые сдвиги для линий */
+}
+
+.timeline-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* Время и название в одной строке */
+.item-headline {
+    display: flex;
+    align-items: baseline; /* Выравнивание по нижней линии текста */
+    gap: 12px; /* Отступ между временем и названием */
+    margin-bottom: 8px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #1a1a1a;
+    font-weight: 400;
+}
+
+/* Время: тонкое */
+.item-time {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 400; /* Тонкое начертание */
+    color: #1a1a1a;
+    min-width: 45px; /* Фиксированная ширина для ровного старта названий */
+}
+
+.item-desc {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #555555;
+    margin: 0;
+    padding-left: 57px; /* Отступ, чтобы описание шло ровно под названием */
+}
+
+/* --- СЕКЦИЯ ДРЕСС-КОД --- */
+.dresscode-section {
+    background-color: #1f2022; /* Темный фон, как у капсулы */
+    padding: 60px 20px 80px 20px;
+    display: flex;
+    justify-content: center;
+    color: #ffffff;
+}
+
+.dresscode-container {
+    max-width: 480px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Заголовок DRESS CODE и подзаголовок (выравнивание по правому краю) */
+.dresscode-header {
+    text-align: right;
+    margin-bottom: 50px;
+    width: 100%;
+}
+
+.dress-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    line-height: 1.1;
+    letter-spacing: 1px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.dress-subtitle {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #e0e0e0; /* Чуть светлее белого для подзаголовка */
+}
+
+/* Основной блок с ДЕВУШКИ */
+.dresscode-body {
+    margin-bottom: 60px;
+}
+
+.dress-gender {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.dress-desc {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #e0e0e0;
+    margin-bottom: 30px;
+}
+
+/* Текстовый блок с правилами */
+.dress-rules {
+    display: flex;
+    flex-direction: column;
+}
+
+.dress-rule-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #ffffff;
+}
+
+/* Футер: линия и ЛИСТАЙТЕ ВБОК */
+.dress-footer {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.dress-footer-line {
+    width: 25px;
+    height: 1px;
+    background-color: #ffffff;
+}
+
+.dress-footer-text {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #ffffff;
+    opacity: 0.9;
+}
+
+/* --- СЕКЦИЯ DETAILS (КАК КАПСУЛА) --- */
+.details-section {
+    background-color: #ffffff;
+    padding: 40px 20px 80px 20px;
+    display: flex;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.details-container {
+    max-width: 480px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Сама капсула - используем стили как у location */
+.details-capsule {
+    background-color: #1f2022;
+    width: 100%;
+    border-radius: 200px 200px 200px 200px; 
+    padding: 90px 30px 90px 30px; /* Чуть меньше отступов, чтобы овал был компактнее под текст */
+    text-align: center;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.details-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+}
+
+.details-text-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.details-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #e0e0e0; /* Светло-серый для текста, как в дресс-коде */
+}
+
+
+/* --- СЕКЦИЯ RSVP --- */
+.rsvp-section {
+    background-color: #1f2022; /* Темный фон */
+    padding: 60px 20px 100px 20px;
+    display: flex;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.rsvp-container {
+    max-width: 480px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Белая капсула */
+.rsvp-capsule {
+    background-color: #ffffff;
+    width: 100%;
+    border-radius: 200px 200px 200px 200px;
+    padding: 80px 30px 80px 30px;
+    text-align: center;
+    color: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.rsvp-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+}
+
+.rsvp-intro {
+    margin-bottom: 35px;
+}
+
+.rsvp-date-text {
+    font-size: 0.95rem;
+    color: #333333;
+    margin-bottom: 15px;
+}
+
+.rsvp-desc {
+    font-size: 0.9rem;
+    color: #555555;
+    line-height: 1.5;
+}
+
+/* --- Форма --- */
+.rsvp-form {
+    width: 100%;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 30px;
+}
+
+.form-label {
+    display: block;
+    font-size: 0.95rem;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+}
+
+.form-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #1a1a1a;
+    padding: 10px 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    color: #555555;
+    outline: none;
+    background: transparent;
+    transition: border-color 0.3s;
+}
+.form-input:focus {
+    border-bottom-color: #b0b0b0;
+}
+.form-input::placeholder {
+    color: #b0b0b0;
+}
+
+/* --- Радио и Чекбоксы --- */
+.radio-group, .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.radio-item, .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    color: #1a1a1a;
+}
+
+/* Скрываем стандартные инпуты */
+.radio-item input[type="radio"],
+.checkbox-item input[type="checkbox"] {
+    display: none;
+}
+
+/* Кастомные кружочки для радио */
+.custom-radio {
+    width: 18px;
+    height: 18px;
+    border: 1px solid #1a1a1a;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    flex-shrink: 0;
+}
+.radio-item input[type="radio"]:checked + .custom-radio::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-color: #1a1a1a;
+    border-radius: 50%;
+}
+
+/* Кастомные квадратики для чекбоксов */
+.custom-checkbox {
+    width: 18px;
+    height: 18px;
+    border: 1px solid #1a1a1a;
+    display: inline-block;
+    position: relative;
+    flex-shrink: 0;
+}
+.checkbox-item input[type="checkbox"]:checked + .custom-checkbox::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #1a1a1a;
+    font-size: 14px;
+}
+
+/* Кнопка отправки RSVP */
+.rsvp-submit-btn {
+    background-color: #1f2022; /* Черный цвет, как у капсулы */
+    color: #ffffff;
+    border: none;
+    padding: 16px 45px;
+    border-radius: 50px; /* Овальная форма */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.3s, transform 0.2s;
+}
+
+.rsvp-submit-btn:hover {
+    opacity: 0.8;
+}
+
+.rsvp-submit-btn:active {
+    transform: scale(0.95);
+}
+
+
+/* --- НУЛЕВАЯ СЕКЦИЯ (ЭФФЕКТ ИСЧЕЗНОВЕНИЯ) --- */
+.cover-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #2b2b2b;
+    z-index: 9999; /* Поверх всего */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Playfair Display', serif;
+    transition: opacity 1.8s ease-in-out; /* Дольше и мягче */
+}
+
+.cover-container {
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.cover-subtitle {
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin-bottom: 25px;
+    transition: opacity 0.6s ease;
+}
+
+.cover-logo {
+    font-size: 4.5rem;
+    color: #ffffff;
+    letter-spacing: 5px;
+    margin-bottom: 25px;
+    transition: opacity 0.6s ease;
+}
+
+/* Обертка для фото */
+.cover-image-wrapper {
+    width: 85%;
+    max-width: 300px;
+    aspect-ratio: 1 / 1;
+    border: 2px solid #ffffff;
+    padding: 6px;
+    box-sizing: border-box;
+    cursor: pointer;
+    position: relative;
+    transition: opacity 0.6s ease;
+}
+
+.cover-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%); /* Ч/Б */
+    display: block;
+}
+
+.cover-hint {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    color: #ffffff;
+    line-height: 1.5;
+    margin-top: 30px;
+    transition: opacity 0.6s ease;
+}
+
+/* --- КЛАСС ДЛЯ ИСЧЕЗНОВЕНИЯ --- */
+.cover-section.fade-out {
+    opacity: 0; /* Всё становится прозрачным */
+    pointer-events: none; /* Блок перестает реагировать на клики */
+}
+
+/* --- ФУТЕР (ФИНАЛЬНАЯ СЕКЦИЯ) --- */
+.footer-section {
+    background-color: #ffffff;
+    padding: 60px 20px 100px 20px; /* Большой отступ снизу для красивого завершения */
+    display: flex;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+}
+
+.footer-container {
+    max-width: 480px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Тонкая линия-разделитель */
+.footer-divider {
+    width: 40px;
+    height: 1px;
+    background-color: #1a1a1a;
+    margin-bottom: 30px;
+}
+
+/* Крупный заголовок */
+.footer-title {
+    font-size: 2.2rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #1a1a1a;
+    line-height: 1.1;
+    margin: 0;
+}
+
+/* --- УБИРАЕМ СИНЕЕ ВЫДЕЛЕНИЕ НА МОБИЛЬНЫХ --- */
+* {
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none !important;
+}
+
+/* Дополнительно: убираем синюю обводку при клике на кнопки/инпуты в браузерах */
+input, button, textarea, select, a {
+    outline: none !important;
+    outline: 0 !important;
+}
+
+/* Для некоторых браузеров (Firefox на Android) */
+::selection {
+    background: transparent;
+}
+    </style>
+</head>
+<body>
+
+
+<!-- Нулевая секция (Обложка) -->
+<section class="cover-section" id="coverSection">
+    <div class="cover-bg"></div> <!-- Темный фон, который будет исчезать -->
+    
+    <div class="cover-container">
+        <p class="cover-subtitle">ПРИГЛАШЕНИЕ НА СВАДЬБУ</p>
+        <div class="cover-logo">А|А</div>
+        
+        <!-- ВАЖНО: нажимаем на эту обертку -->
+        <div class="cover-image-wrapper" id="coverClickArea">
+            <!-- Это то же самое фото 1.jpg -->
+            <img src="1.jpg" alt="Вадим и Анна" class="cover-img" id="expandImage">
+        </div>
+        
+        <p class="cover-hint">Нажмите на фото, чтобы открыть приглашение</p>
+    </div>
+</section>
+
+    <section class="hero-section">
+        <!-- Фоновая картинка (1.jpg) -->
+        <div class="hero-bg"></div>
+        
+        <!-- Затемнение снизу -->
+        <div class="hero-overlay"></div>
+        
+        <!-- Текстовый контент -->
+        <div class="hero-content">
+            <div class="subtitle">WEDDING DAY</div>
+            <h1 class="main-title">АЙК & АНГЕЛИНА</h1>
+            
+            <!-- Линия разделитель -->
+            <div class="divider-line"></div>
+            
+            <!-- Текст снизу -->
+            <div class="scroll-text">ЛИСТАЙТЕ НИЖЕ</div>
+        </div>
+    </section>
+
+<section class="info-section">
+    <div class="info-container">
+        <div class="info-header" data-aos="fade-left">
+            <p class="info-text-top">Мы будем счастливы разделить<br>с вами радость события</p>
+            <h2 class="info-date">16 СЕНТЯБРЯ 2026</h2>
+            <p class="info-text-bottom">По случаю нашей свадьбы</p>
+        </div>
+
+        <div class="location-capsule" data-aos="fade-up" data-aos-delay="200">
+            <h3 class="loc-title">LOCATION</h3>
+            <!-- Локация 1 -->
+            <!-- <div class="loc-block">
+                <p class="loc-name">Дворец бракосочетания № 1</p>
+                <p class="loc-address">Малый Харитоньевский пер., 10, стр. 1</p>
+                <a href="#" class="loc-btn">ПОСТРОИТЬ МАРШРУТ</a>
+            </div> -->
+            <!-- Локация 2 -->
+            <div class="loc-block" data-aos-delay="100">
+                <p class="loc-name">Банкетный зал «Golden Palace»</p>
+                <p class="loc-address">г. Ставрополь, Чапаевский пр., 48</p>
+                <a href="https://yandex.ru/maps/-/CTV07YKs" target="_blank" class="loc-btn">ПАКАЗАТЬ НА КАРТЕ</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="program-section">
+    <div class="program-container">
+        <h2 class="program-title" data-aos="fade-left">WEDDING<br>PROGRAM</h2>
+        
+        <div class="timeline">
+            <!-- Пункт 1 -->
+            <div class="timeline-item" data-aos="fade-left" data-aos-delay="100">
+                <div class="timeline-content">
+                    <p class="item-headline"><span class="item-time">17:00</span> WELCOME</p>
+                    <p class="item-desc">Делимся эмоциями и <br>настраиваемся на праздник</p>
+                </div>
+            </div>
+            <!-- Пункт 2 -->
+            <div class="timeline-item" data-aos="fade-right" data-aos-delay="200">
+                <div class="timeline-content">
+                    <p class="item-headline"><span class="item-time">18:00</span> Свадебный ужин</p>
+                    <p class="item-desc">Самое время для вкусной еды,<br>веселья и танцев</p>
+                </div>
+            </div>
+            <!-- Пункт 3 -->
+            <!-- <div class="timeline-item" data-aos="fade-left" data-aos-delay="300">
+                <div class="timeline-content">
+                    <p class="item-headline"><span class="item-time">17:00</span> Свадебный ужин</p>
+                    <p class="item-desc">Самое время для вкусной еды,<br>веселья и танцев</p>
+                </div>
+            </div> -->
+            <!-- Пункт 4 -->
+            <!-- <div class="timeline-item" data-aos="fade-right" data-aos-delay="400">
+                <div class="timeline-content">
+                    <p class="item-headline"><span class="item-time">23:00</span> Финал</p>
+                    <p class="item-desc">Надеемся, что наш праздник<br>запомнится вам</p>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</section>
+
+
+<section class="dresscode-section">
+    <div class="dresscode-container">
+        <div class="dresscode-header" data-aos="fade-right">
+            <h2 class="dress-title">DRESS<br>CODE</h2>
+            <p class="dress-subtitle">Просим поддержать стилистику<br>нашего события</p>
+        </div>
+        <div class="dresscode-body" data-aos="fade-up" data-aos-delay="150">
+            <div class="dress-rules">
+                <p class="dress-rule-text">
+                    Строгих ограничений по цвету нет,<br>
+                    но белый цвет мы просим оставить<br>
+                    исключительно для невесты.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="details-section">
+    <div class="details-container">
+        <div class="details-capsule" data-aos="fade-up">
+            <h2 class="details-title">DETAILS</h2>
+            <div class="details-text-block">
+                <p class="details-text">
+                    К сожалению, наш праздник не будет подходящем для детей, поэтому, пожалуйста, оставьте детей дома, чтобы
+                    вы могли насладиться вечером в полной мере.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="rsvp-section">
+    <div class="rsvp-container">
+        <div class="rsvp-capsule" data-aos="fade-up">
+            <h2 class="rsvp-title">RSVP</h2>
+            <div class="rsvp-intro">
+                <p class="rsvp-date-text">Просим подтвердить ваше<br>присутствие до 25 июля 2026 г.</p>
+                <!-- <p class="rsvp-desc">Чтобы сделать наше событие комфортным<br>для вас и для нас, ответьте, пожалуйста,<br>на несколько вопросов</p> -->
+            </div>
+
+            <form class="rsvp-form">
+                <!-- Поле Имя -->
+                <div class="form-group">
+                    <label class="form-label">Ваше имя и фамилия</label>
+                    <input type="text" class="form-input" placeholder="Иван Иванов">
+                </div>
+                <!-- Радио кнопки -->
+                <div class="form-group">
+                    <label class="form-label">Планируете ли вы присутствовать?</label>
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="attendance" value="yes"><span class="custom-radio"></span> Да</label>
+                        <label class="radio-item"><input type="radio" name="attendance" value="no"><span class="custom-radio"></span> Нет</label>
+                    </div>
+                </div>
+                <!-- Поле С кем -->
+                <div class="form-group">
+                    <label class="form-label">С кем вы планируете быть на мероприятии?</label>
+                    <input type="text" class="form-input" placeholder="Мария Иванова">
+                </div>
+
+                <!-- Кнопка отправки -->
+                <div class="form-group" style="margin-top: 40px; text-align: center;">
+                    <button type="submit" class="rsvp-submit-btn">ОТПРАВИТЬ</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+<!-- Футер -->
+<section class="footer-section">
+    <div class="footer-container" data-aos="fade-up">
+        <div class="footer-divider"></div>
+        <h2 class="footer-title">ДО СКОРОЙ<br>ВСТРЕЧИ!</h2>
+    </div>
+</section>
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Находим элементы
+        const cover = document.getElementById('coverSection');
+        const clickArea = document.getElementById('coverClickArea');
+        const music = document.getElementById('bgMusic');
+
+        // Событие клика по фото
+        clickArea.addEventListener('click', function() {
+            // 1. Запускаем музыку (обязательно до анимации)
+            music.volume = 0.3; // Громкость 30%
+            music.play().catch(error => {
+                console.log("Ошибка воспроизведения музыки:", error);
+            });
+
+            // 2. Запускаем исчезновение обложки
+            cover.classList.add('fade-out');
+
+            // 3. Ждем, когда анимация CSS реально закончится
+            cover.addEventListener('transitionend', function handler() {
+                cover.style.display = 'none'; // Убираем блок из DOM
+                cover.removeEventListener('transitionend', handler); // Очищаем память
+            });
+        });
+
+        // 4. Инициализация библиотеки анимаций AOS
+        AOS.init({
+            duration: 1800, // Длительность анимации (1.2 сек)
+            once: true,     // Срабатывает только 1 раз
+            offset: 50,     // Смещение старта
+        });
+    });
+</script>
+
+<!-- Скрытый аудио-плеер (оставляем здесь для порядка) -->
+<audio id="bgMusic" loop>
+    <source src="1.mp3" type="audio/mpeg">
+    Ваш браузер не поддерживает аудио.
+</audio>
+
+
+<!-- Скрытый аудио-плеер -->
+<audio id="bgMusic" loop>
+    <source src="1.mp3" type="audio/mpeg">
+    Ваш браузер не поддерживает аудио.
+</audio>
+</body>
+</html>

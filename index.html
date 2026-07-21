@@ -815,27 +815,101 @@ section {
     width: 100%;
 }
 
+/* --- АНИМАЦИИ ДЛЯ НУЛЕВОГО БЛОКА --- */
+.cover-subtitle,
+.cover-logo,
+.cover-image-wrapper,
+.cover-hint {
+    opacity: 0; /* Изначально скрыты */
+}
+
+/* Анимация появления сверху вниз */
+[data-cover-anim="fadeDown"] {
+    animation: coverFadeDown 1.2s ease forwards;
+    animation-delay: 0.3s;
+}
+
+/* Анимация появления снизу вверх */
+[data-cover-anim="fadeUp"] {
+    animation: coverFadeUp 1.2s ease forwards;
+    animation-delay: 0.6s;
+}
+
+/* Анимация масштабирования */
+[data-cover-anim="scaleIn"] {
+    animation: coverScaleIn 1.2s ease forwards;
+    animation-delay: 0.9s;
+}
+
+/* Ключевые кадры */
+@keyframes coverFadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes coverFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes coverScaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Задержки для каждого элемента */
+.cover-subtitle {
+    animation-delay: 0.3s !important;
+}
+
+.cover-logo {
+    animation-delay: 0.6s !important;
+}
+
+.cover-image-wrapper {
+    animation-delay: 0.9s !important;
+}
+
+.cover-hint {
+    animation-delay: 1.2s !important;
+}
+
 
     </style>
 </head>
 <body>
 
-
 <!-- Нулевая секция (Обложка) -->
 <section class="cover-section" id="coverSection">
-    <div class="cover-bg"></div> <!-- Темный фон, который будет исчезать -->
+    <div class="cover-bg"></div>
     
     <div class="cover-container">
-        <p class="cover-subtitle">ПРИГЛАШЕНИЕ НА СВАДЬБУ</p>
-        <div class="cover-logo">А|А</div>
+        <p class="cover-subtitle" data-cover-anim="fadeDown">ПРИГЛАШЕНИЕ НА СВАДЬБУ</p>
+        <div class="cover-logo" data-cover-anim="fadeUp">А|А</div>
         
-        <!-- ВАЖНО: нажимаем на эту обертку -->
-        <div class="cover-image-wrapper" id="coverClickArea">
-            <!-- Это то же самое фото 1.jpg -->
+        <div class="cover-image-wrapper" id="coverClickArea" data-cover-anim="scaleIn">
             <img src="1.jpg" alt="Вадим и Анна" class="cover-img" id="expandImage">
         </div>
         
-        <p class="cover-hint">Нажмите на фото, чтобы открыть приглашение</p>
+        <p class="cover-hint" data-cover-anim="fadeUp">Нажмите на фото, чтобы открыть приглашение</p>
     </div>
 </section>
 

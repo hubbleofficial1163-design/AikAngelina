@@ -778,6 +778,42 @@ input, button, textarea, select, a {
 ::selection {
     background: transparent;
 }
+
+/* --- ПОЛНОЭКРАННАЯ ФОТО-СЕКЦИЯ (УМЕНЬШЕННАЯ) --- */
+.full-image-section {
+    width: 100%;
+    height: 60vh; /* Вместо 100vh - половина экрана */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+}
+
+.full-image-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Добавить ко всем секциям с анимациями */
+.hero-section,
+.info-section,
+.program-section,
+.dresscode-section,
+.details-section,
+.rsvp-section,
+.footer-section {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* Или универсально для всех секций */
+section {
+    overflow-x: hidden;
+    width: 100%;
+}
     </style>
 </head>
 <body>
@@ -885,6 +921,11 @@ input, button, textarea, select, a {
     </div>
 </section>
 
+<!-- ПОЛНОЭКРАННАЯ ФОТО-СЕКЦИЯ -->
+<section class="full-image-section" data-aos="fade-up">
+    <img src="sec.jpg" alt="Фото">
+</section>
+
 
 <section class="dresscode-section">
     <div class="dresscode-container">
@@ -912,7 +953,7 @@ input, button, textarea, select, a {
             <h2 class="details-title">DETAILS</h2>
             <div class="details-text-block">
                 <p class="details-text">
-                    К сожалению, наш праздник не будет подходящем для детей, поэтому, пожалуйста, оставьте детей дома, чтобы
+                    К сожалению, наш праздник не будет подходящим для детей, поэтому, пожалуйста, оставьте детей дома, чтобы
                     вы могли насладиться вечером в полной мере.
                 </p>
             </div>
@@ -926,7 +967,7 @@ input, button, textarea, select, a {
         <div class="rsvp-capsule" data-aos="fade-up">
             <h2 class="rsvp-title">RSVP</h2>
             <div class="rsvp-intro">
-                <p class="rsvp-date-text">Просим подтвердить ваше<br>присутствие до 25 июля 2026 г.</p>
+                <p class="rsvp-date-text">Просим подтвердить ваше<br>присутствие до 20 августа 2026 г.</p>
                 <!-- <p class="rsvp-desc">Чтобы сделать наше событие комфортным<br>для вас и для нас, ответьте, пожалуйста,<br>на несколько вопросов</p> -->
             </div>
 
@@ -1012,10 +1053,6 @@ input, button, textarea, select, a {
 </audio>
 
 
-<!-- Скрытый аудио-плеер -->
-<audio id="bgMusic" loop>
-    <source src="1.mp3" type="audio/mpeg">
-    Ваш браузер не поддерживает аудио.
-</audio>
+
 </body>
 </html>

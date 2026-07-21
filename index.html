@@ -740,8 +740,8 @@ body {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start; /* ← меняем с center на flex-start */
+    text-align: left; /* ← меняем с center на left */
 }
 
 /* Тонкая линия-разделитель */
@@ -938,9 +938,8 @@ section {
         <div class="dresscode-body" data-aos="fade-up" data-aos-delay="150">
             <div class="dress-rules">
                 <p class="dress-rule-text">
-                    Строгих ограничений по цвету нет,<br>
-                    но белый цвет мы просим оставить<br>
-                    исключительно для невесты.
+                    Дорогие дамы, просим оставить белый цвет для невесты<br> <br>
+                    Мужчин будем рады видеть в классических костюмах
                 </p>
             </div>
         </div>
@@ -1006,7 +1005,7 @@ section {
 <!-- Футер -->
 <section class="footer-section">
     <div class="footer-container" data-aos="fade-up">
-        <div class="footer-divider"></div>
+
         <h2 class="footer-title">ДО СКОРОЙ<br>ВСТРЕЧИ!</h2>
     </div>
 </section>

@@ -1128,6 +1128,258 @@ section {
 </audio>
 
 
+<!-- Модальные окна -->
+<div id="customModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); backdrop-filter:blur(4px); z-index:10000; align-items:center; justify-content:center;">
+    <div style="background:#ffffff; border-radius:16px; padding:32px 40px; max-width:380px; width:90%; text-align:center; box-shadow:0 20px 35px rgba(0,0,0,0.15); font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; border-top:3px solid #2e7d32;">
+        <div style="width:60px; height:60px; border-radius:50%; background:#e8f5e9; display:flex; align-items:center; justify-content:center; margin:0 auto 20px auto;">
+            <div id="modalIcon" style="font-size:32px; font-weight:400; color:#2e7d32; line-height:1;">✓</div>
+        </div>
+        <h3 id="modalTitle" style="font-size:24px; font-weight:500; color:#1a1a1a; margin-bottom:12px; letter-spacing:-0.3px;">Спасибо!</h3>
+        <p id="modalMessage" style="font-size:16px; color:#555555; margin-bottom:28px; line-height:1.5;">Ваш ответ отправлен.</p>
+        <button onclick="closeModal()" style="background:#f5f5f5; color:#333333; border:none; padding:12px 32px; border-radius:40px; font-family:inherit; font-size:15px; font-weight:500; cursor:pointer; transition:all 0.2s ease;">Закрыть</button>
+    </div>
+</div>
 
+<div id="loadingModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); backdrop-filter:blur(3px); z-index:9999; align-items:center; justify-content:center;">
+    <div style="background:white; border-radius:16px; padding:32px 40px; text-align:center; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+        <div style="width:50px; height:50px; border:3px solid #e0e0e0; border-top-color:#1f2022; border-radius:50%; margin:0 auto 20px; animation:spin 1s linear infinite;"></div>
+        <p style="font-size:15px; color:#1f2022; margin:0; font-weight:500;">Отправка ответа...</p>
+    </div>
+</div>
+
+<style>
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    #customModal { display: none; }
+    #loadingModal { display: none; }
+</style>
+
+<script>
+// ==============================================
+// СВАДЕБНЫЙ САЙТ - АЙК & АНГЕЛИНА
+// Интеграция с Google Sheets
+// ==============================================
+
+(function() {
+    // ========== КОНФИГУРАЦИЯ ==========
+    // ⚠️ ЗАМЕНИТЕ ЭТОТ URL НА ВАШ URL ИЗ APPS SCRIPT ⚠️
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwZigDFjfKq3Hc0CED5Pj7Gj_VcsWhEnYmqcpNviRCuctiaCwk2pO-gA1rT_RPgZ2Ho/exec';
+    
+    let isSubmitting = false;
+    
+    // ========== МОДАЛЬНЫЕ ОКНА ==========
+    function showModal(title, message, isError = false) {
+        const modal = document.getElementById('customModal');
+        const titleEl = document.getElementById('modalTitle');
+        const msgEl = document.getElementById('modalMessage');
+        const iconEl = document.getElementById('modalIcon');
+        const borderEl = modal.querySelector('div:first-child');
+        
+        if (!modal || !titleEl || !msgEl || !iconEl) return;
+        
+        titleEl.textContent = title;
+        msgEl.textContent = message;
+        
+        if (isError) {
+            iconEl.textContent = '✕';
+            iconEl.style.color = '#c62828';
+            iconEl.parentElement.style.background = '#ffebee';
+            borderEl.style.borderTopColor = '#c62828';
+        } else {
+            iconEl.textContent = '✓';
+            iconEl.style.color = '#2e7d32';
+            iconEl.parentElement.style.background = '#e8f5e9';
+            borderEl.style.borderTopColor = '#2e7d32';
+        }
+        
+        modal.style.display = 'flex';
+        
+        if (!isError) {
+            setTimeout(() => {
+                closeModal();
+            }, 4000);
+        }
+    }
+    
+    window.closeModal = function() {
+        const modal = document.getElementById('customModal');
+        if (modal) modal.style.display = 'none';
+    };
+    
+    function showLoading() {
+        const modal = document.getElementById('loadingModal');
+        if (modal) modal.style.display = 'flex';
+    }
+    
+    function hideLoading() {
+        const modal = document.getElementById('loadingModal');
+        if (modal) modal.style.display = 'none';
+    }
+    
+    // ========== ОТПРАВКА В GOOGLE SHEETS ==========
+    async function sendToGoogleSheets(formData) {
+        const formBody = new URLSearchParams();
+        formBody.append('name', formData.name);
+        formBody.append('attendance', formData.attendance);
+        if (formData.partner) formBody.append('partner', formData.partner);
+        
+        const response = await fetch(SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: formBody.toString()
+        });
+        
+        const result = await response.json();
+        return result;
+    }
+    
+    // ========== ИНИЦИАЛИЗАЦИЯ ФОРМЫ ==========
+    function initRSVPForm() {
+        const form = document.querySelector('.rsvp-form');
+        if (!form) {
+            console.error('❌ Форма .rsvp-form не найдена!');
+            return;
+        }
+        
+        console.log('✅ Форма найдена, инициализация...');
+        
+        // Находим все поля ввода в форме
+        const allInputs = form.querySelectorAll('.form-input');
+        
+        // Первое поле - имя
+        const nameInput = allInputs[0];
+        
+        // Второе поле - "С кем планируете быть" (если оно есть)
+        const partnerInput = allInputs.length > 1 ? allInputs[1] : null;
+        
+        const attendanceRadios = form.querySelectorAll('input[name="attendance"]');
+        const submitBtn = form.querySelector('.rsvp-submit-btn');
+        
+        // Убираем старый обработчик submit
+        form.onsubmit = null;
+        
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (isSubmitting) return;
+            
+            const name = nameInput ? nameInput.value.trim() : '';
+            
+            let attendance = null;
+            attendanceRadios.forEach(radio => {
+                if (radio.checked) attendance = radio.value;
+            });
+            
+            // Если есть второе поле - берём его, иначе пустая строка
+            const partner = partnerInput ? partnerInput.value.trim() : '';
+            
+            // Валидация
+            if (!name) {
+                showModal('Ошибка', 'Пожалуйста, введите ваше имя и фамилию', true);
+                if (nameInput) nameInput.focus();
+                return;
+            }
+            
+            if (!attendance) {
+                showModal('Ошибка', 'Пожалуйста, выберите, планируете ли вы присутствовать', true);
+                return;
+            }
+            
+            // Блокируем кнопку
+            isSubmitting = true;
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Отправка...';
+            }
+            
+            showLoading();
+            
+            try {
+                const formData = { 
+                    name: name, 
+                    attendance: attendance,
+                    partner: partner
+                };
+                
+                const result = await sendToGoogleSheets(formData);
+                
+                hideLoading();
+                
+                if (result.result === 'success') {
+                    let responseMessage = '';
+                    if (attendance === 'yes') {
+                        responseMessage = `Спасибо, ${name}! Будем ждать вас на нашей свадьбе 16 сентября 2026 года! 🎉`;
+                    } else {
+                        responseMessage = `Спасибо за ответ, ${name}! Очень жаль, что вы не сможете быть с нами.`;
+                    }
+                    
+                    showModal('Ответ отправлен!', responseMessage, false);
+                    
+                    // Очищаем форму
+                    if (nameInput) nameInput.value = '';
+                    attendanceRadios.forEach(radio => radio.checked = false);
+                    if (partnerInput) partnerInput.value = '';
+                    
+                    if (navigator.vibrate) navigator.vibrate([50, 30, 50]);
+                } else {
+                    throw new Error(result.message || 'Ошибка отправки');
+                }
+            } catch (error) {
+                hideLoading();
+                showModal('Ошибка', error.message || 'Произошла ошибка при отправке. Пожалуйста, попробуйте ещё раз.', true);
+            } finally {
+                isSubmitting = false;
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'ОТПРАВИТЬ';
+                }
+            }
+        });
+    }
+    
+    // ========== ЗАПУСК ==========
+    document.addEventListener('DOMContentLoaded', function() {
+        // Инициализация AOS
+        if (typeof AOS !== 'undefined') {
+            AOS.init({
+                duration: 1800,
+                once: true,
+                offset: 50,
+            });
+        }
+        
+        // Обложка и музыка (сохраняем существующую логику)
+        const cover = document.getElementById('coverSection');
+        const clickArea = document.getElementById('coverClickArea');
+        const music = document.getElementById('bgMusic');
+
+        if (cover && clickArea) {
+            clickArea.addEventListener('click', function() {
+                if (music) {
+                    music.volume = 0.3;
+                    music.play().catch(error => {
+                        console.log("Ошибка воспроизведения музыки:", error);
+                    });
+                }
+
+                cover.classList.add('fade-out');
+
+                cover.addEventListener('transitionend', function handler() {
+                    cover.style.display = 'none';
+                    cover.removeEventListener('transitionend', handler);
+                });
+            });
+        }
+        
+        // Форма
+        initRSVPForm();
+        
+        console.log('✅ Форма RSVP готова к отправке в Google Sheets');
+        console.log('📊 URL скрипта:', SCRIPT_URL);
+    });
+    
+})();
+</script>
 </body>
 </html>

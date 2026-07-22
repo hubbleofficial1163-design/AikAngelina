@@ -51,10 +51,10 @@ body {
             width: 100%;
             height: 100%;
             /* ИСПОЛЬЗУЕМ ВАШЕ ФОТО 1.jpg */
-            background-image: url('11.jpg'); 
+            background-image: url('footer.jpg'); 
             background-size: cover;
             background-position: center 20%; /* Смещаем фокус чуть выше, чтобы лица были видны */
-            filter: grayscale(100%); /* Делаем фото Ч/Б */
+            
             z-index: 1;
         }
 
@@ -707,7 +707,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: grayscale(100%); /* Ч/Б */
+
     display: block;
 }
 
@@ -918,6 +918,37 @@ section {
 }
 
 
+
+/* Обертка для фото */
+.cover-image-wrapper {
+    width: 85%;
+    max-width: 300px;
+    border: 2px solid #ffffff;
+    padding: 6px;
+    box-sizing: border-box;
+    cursor: pointer;
+    position: relative;
+    transition: opacity 0.6s ease;
+    overflow: hidden;
+}
+
+/* Создаем квадрат через ::before */
+.cover-image-wrapper::before {
+    content: '';
+    display: block;
+    padding-bottom: 100%; /* Создает квадрат */
+}
+
+.cover-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
     </style>
 </head>
 <body>
@@ -931,7 +962,7 @@ section {
         <div class="cover-logo" data-cover-anim="fadeUp">А|А</div>
         
         <div class="cover-image-wrapper" id="coverClickArea" data-cover-anim="scaleIn">
-            <img src="11.jpg" alt="Вадим и Анна" class="cover-img" id="expandImage">
+            <img src="footer.jpg" alt="Вадим и Анна" class="cover-img" id="expandImage">
         </div>
         
         <p class="cover-hint" data-cover-anim="fadeUp">Нажмите на фото, чтобы открыть приглашение</p>
@@ -1024,7 +1055,7 @@ section {
 
 <!-- ПОЛНОЭКРАННАЯ ФОТО-СЕКЦИЯ -->
 <section class="full-image-section" data-aos="fade-up">
-    <img src="sec.jpg" alt="Фото">
+    <img src="11.jpg" alt="Фото">
 </section>
 
 
@@ -1100,10 +1131,7 @@ section {
     </div>
 </section>
 
-<!-- ФОТО-СЕКЦИЯ (как sec.jpg) -->
-<section class="full-image-section" data-aos="fade-up">
-    <img src="footer.jpg" alt="Фото">
-</section>
+
 <!-- Футер -->
 <!-- Футер -->
 <section class="footer-section">

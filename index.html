@@ -57,19 +57,17 @@ body {
         }
 
         /* Фоновое изображение */
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /* ИСПОЛЬЗУЕМ ВАШЕ ФОТО 1.jpg */
-            background-image: url('footer.jpg'); 
-            background-size: cover;
-            background-position: center 20%; /* Смещаем фокус чуть выше, чтобы лица были видны */
-            
-            z-index: 1;
-        }
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('footer.jpg'); 
+    background-size: 180%;
+    background-position: 35% 85%; /* ← ПЕРВОЕ ЧИСЛО = ВПРАВО/ВЛЕВО, ВТОРОЕ = ВВЕРХ/ВНИЗ */
+    z-index: 1;
+}
 
         /* Темный градиент для читаемости текста (как на референсе) */
         .hero-overlay {
@@ -84,20 +82,19 @@ body {
         }
 
         /* Контентная часть (Текст) */
-        .hero-content {
-            position: relative;
-            z-index: 3;
-            text-align: center;
-            color: #ffffff;
-            /* Отступ снизу, чтобы текст стоял внизу как на фото, а не по центру */
-            align-self: flex-end; 
-            padding-bottom: 8vh; 
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
+.hero-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    color: #ffffff;
+    align-self: flex-end; 
+    padding-bottom: 22vh; /* ← ПОДНИМАЕМ ВЫШЕ */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
 
         /* Стили текста: WEDDING DAY */
         .subtitle {
@@ -807,6 +804,7 @@ input, button, textarea, select, a {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top; /* ← ДОБАВЬТЕ ЭТУ СТРОЧКУ */
     display: block;
 }
 
@@ -959,7 +957,54 @@ section {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: 50% 100%;
+    transform: scale(1.3); /* ← ДОБАВЬТЕ (увеличение) */
     display: block;
+}
+
+.cover-bg-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('footer.jpg');
+    background-size: 300%; /* ← УВЕЛИЧИВАЕМ ДО 300% (было 180%) */
+    background-position: 30% 30%; /* ← ТЕПЕРЬ СМЕЩЕНИЕ БУДЕТ РАБОТАТЬ */
+    background-repeat: no-repeat;
+    display: block;
+}
+
+/* Контейнер hero-контента */
+.hero-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    color: #ffffff;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* Распределяет пространство между верхом и низом */
+    padding: 10vh 0 8vh 0; /* Отступы сверху и снизу */
+}
+
+/* Верхняя часть - имена и WEDDING DAY (по центру) */
+.hero-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1; /* Занимает всё доступное пространство */
+    justify-content: center; /* Центрирует содержимое по вертикали */
+}
+
+/* Нижняя часть - линия и "ЛИСТАЙТЕ НИЖЕ" (внизу) */
+.hero-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0; /* Не сжимается */
 }
 
     </style>
@@ -990,16 +1035,19 @@ section {
         <div class="hero-overlay"></div>
         
         <!-- Текстовый контент -->
-        <div class="hero-content">
-            <div class="subtitle">WEDDING DAY</div>
-            <h1 class="main-title">АЙК & АНГЕЛИНА</h1>
-            
-            <!-- Линия разделитель -->
-            <div class="divider-line"></div>
-            
-            <!-- Текст снизу -->
-            <div class="scroll-text">ЛИСТАЙТЕ НИЖЕ</div>
-        </div>
+<div class="hero-content">
+    <!-- ВЕРХНЯЯ ЧАСТЬ (поднимается) -->
+    <div class="hero-top">
+        <div class="subtitle">WEDDING DAY</div>
+        <h1 class="main-title">АЙК & АНГЕЛИНА</h1>
+    </div>
+    
+    <!-- НИЖНЯЯ ЧАСТЬ (остаётся на месте) -->
+    <div class="hero-bottom">
+        <div class="divider-line"></div>
+        <div class="scroll-text">ЛИСТАЙТЕ НИЖЕ</div>
+    </div>
+</div>
     </section>
 
 <section class="info-section">
@@ -1130,10 +1178,10 @@ section {
                     </div>
                 </div>
                 <!-- Поле С кем -->
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="form-label">С кем вы планируете быть на мероприятии?</label>
                     <input type="text" class="form-input" placeholder="Мария Иванова">
-                </div>
+                </div> -->
 
                 <!-- Кнопка отправки -->
                 <div class="form-group" style="margin-top: 40px; text-align: center;">
@@ -1233,7 +1281,7 @@ section {
 (function() {
     // ========== КОНФИГУРАЦИЯ ==========
     // ⚠️ ЗАМЕНИТЕ ЭТОТ URL НА ВАШ URL ИЗ APPS SCRIPT ⚠️
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwZigDFjfKq3Hc0CED5Pj7Gj_VcsWhEnYmqcpNviRCuctiaCwk2pO-gA1rT_RPgZ2Ho/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxg3tbl77VYzscLx_YXmpbUnM_ai8lq7VzcVPqtkC2f5N5zB5DxCtCJ2e_4vDNXId4CnA/exec';
     
     let isSubmitting = false;
     
@@ -1291,7 +1339,6 @@ section {
         const formBody = new URLSearchParams();
         formBody.append('name', formData.name);
         formBody.append('attendance', formData.attendance);
-        if (formData.partner) formBody.append('partner', formData.partner);
         
         const response = await fetch(SCRIPT_URL, {
             method: 'POST',
@@ -1313,15 +1360,8 @@ section {
         
         console.log('✅ Форма найдена, инициализация...');
         
-        // Находим все поля ввода в форме
-        const allInputs = form.querySelectorAll('.form-input');
-        
-        // Первое поле - имя
-        const nameInput = allInputs[0];
-        
-        // Второе поле - "С кем планируете быть" (если оно есть)
-        const partnerInput = allInputs.length > 1 ? allInputs[1] : null;
-        
+        // Находим поле имени (первое поле ввода)
+        const nameInput = form.querySelector('.form-input');
         const attendanceRadios = form.querySelectorAll('input[name="attendance"]');
         const submitBtn = form.querySelector('.rsvp-submit-btn');
         
@@ -1339,9 +1379,6 @@ section {
             attendanceRadios.forEach(radio => {
                 if (radio.checked) attendance = radio.value;
             });
-            
-            // Если есть второе поле - берём его, иначе пустая строка
-            const partner = partnerInput ? partnerInput.value.trim() : '';
             
             // Валидация
             if (!name) {
@@ -1367,8 +1404,7 @@ section {
             try {
                 const formData = { 
                     name: name, 
-                    attendance: attendance,
-                    partner: partner
+                    attendance: attendance
                 };
                 
                 const result = await sendToGoogleSheets(formData);
@@ -1388,7 +1424,6 @@ section {
                     // Очищаем форму
                     if (nameInput) nameInput.value = '';
                     attendanceRadios.forEach(radio => radio.checked = false);
-                    if (partnerInput) partnerInput.value = '';
                     
                     if (navigator.vibrate) navigator.vibrate([50, 30, 50]);
                 } else {

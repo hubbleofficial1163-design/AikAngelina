@@ -51,7 +51,7 @@ body {
             width: 100%;
             height: 100%;
             /* ИСПОЛЬЗУЕМ ВАШЕ ФОТО 1.jpg */
-            background-image: url('1.jpg'); 
+            background-image: url('11.jpg'); 
             background-size: cover;
             background-position: center 20%; /* Смещаем фокус чуть выше, чтобы лица были видны */
             filter: grayscale(100%); /* Делаем фото Ч/Б */
@@ -729,7 +729,7 @@ body {
 /* --- ФУТЕР (ФИНАЛЬНАЯ СЕКЦИЯ) --- */
 .footer-section {
     background-color: #ffffff;
-    padding: 60px 20px 100px 20px; /* Большой отступ снизу для красивого завершения */
+    padding: 0; /* Убираем все отступы */
     display: flex;
     justify-content: center;
     font-family: 'Playfair Display', serif;
@@ -891,6 +891,31 @@ section {
 .cover-hint {
     animation-delay: 1.2s !important;
 }
+.footer-section {
+    background-color: #ffffff;
+    padding: 60px 20px 100px 20px; /* Отступы справа/слева для текста */
+    display: flex;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+}
+
+.footer-container {
+    max-width: 480px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.footer-title {
+    font-size: 2.2rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #1a1a1a;
+    line-height: 1.1;
+    margin: 0;
+}
 
 
     </style>
@@ -906,7 +931,7 @@ section {
         <div class="cover-logo" data-cover-anim="fadeUp">А|А</div>
         
         <div class="cover-image-wrapper" id="coverClickArea" data-cover-anim="scaleIn">
-            <img src="1.jpg" alt="Вадим и Анна" class="cover-img" id="expandImage">
+            <img src="11.jpg" alt="Вадим и Анна" class="cover-img" id="expandImage">
         </div>
         
         <p class="cover-hint" data-cover-anim="fadeUp">Нажмите на фото, чтобы открыть приглашение</p>
@@ -1075,11 +1100,14 @@ section {
     </div>
 </section>
 
-
+<!-- ФОТО-СЕКЦИЯ (как sec.jpg) -->
+<section class="full-image-section" data-aos="fade-up">
+    <img src="footer.jpg" alt="Фото">
+</section>
+<!-- Футер -->
 <!-- Футер -->
 <section class="footer-section">
     <div class="footer-container" data-aos="fade-up">
-
         <h2 class="footer-title">ДО СКОРОЙ<br>ВСТРЕЧИ!</h2>
     </div>
 </section>
